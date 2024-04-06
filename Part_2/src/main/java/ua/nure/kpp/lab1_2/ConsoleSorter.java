@@ -1,7 +1,7 @@
-package org.example;
+package ua.nure.kpp.lab1_2;
 import java.util.Scanner;
 
-public class Arrayyy {
+public class ConsoleSorter {
     Scanner sc = new Scanner(System.in);
 
     private int size;
@@ -94,109 +94,6 @@ public class Arrayyy {
         System.out.println();
     }
 
-    public void BubbleSort(){
-        if(Flag() == 0) {
-            for (int i = 0; i < mas.length - 1; ++i) {
-                for (int j = i + 1; j < mas.length; ++j) {
-                    if (mas[i] > mas[j]) {
-                        int tmp = mas[i];
-                        mas[i] = mas[j];
-                        mas[j] = tmp;
-                    }
-                }
-            }
-        }
-        else {
-            for (int i = 0; i < mas.length - 1; ++i) {
-                for (int j = i + 1; j < mas.length; ++j) {
-                    if (mas[i] < mas[j]) {
-                        int tmp = mas[i];
-                        mas[i] = mas[j];
-                        mas[j] = tmp;
-                    }
-                }
-            }
-        }
-    }
-
-    public void ShellSort() {
-        int step = mas.length / 2;
-        while(step > 0) {
-            for(int i = step; i < mas.length; i++) {
-                for(int j = i; j >= step && mas[j] > mas[j - step]; j -= step) {
-                    int tmp = mas[j];
-                    mas[j] = mas[j - step];
-                    mas[j - step] = tmp;
-                }
-            }
-            step = step / 2;
-        }
-    }
-
-    public void MergeSort(int[] arr) {
-        int size = arr.length;
-        if(size == 1) return;
-
-        int mid = size / 2;
-        int[] l = new int[mid];
-        int[] r = new int[size - mid];
-
-        for(int i = 0; i < mid; i++)
-            l[i] = arr[i];
-        for(int i = mid; i < size; i++)
-            r[i - mid] = arr[i];
-
-        MergeSort(l);
-        MergeSort(r);
-        if(flag == -1)
-            Merge(arr, l, r, Flag());
-        else
-            Merge(arr, l, r, flag);
-    }
-
-    private void Merge(int[] arr, int[] l, int[] r, int flag) {
-        int left = l.length;
-        int right = r.length;
-        int i = 0;
-        int j = 0;
-        int idx = 0;
-
-
-        if(flag == 0) {
-            while(i < left && j < right) {
-                if(l[i] > r[j]) {
-                    arr[idx] = l[i];
-                    i++;
-                }
-                else {
-                    arr[idx] = r[j];
-                    j++;
-                }
-                idx++;
-            }
-        }
-        else {
-            while(i < left && j < right) {
-                if(l[i] < r[j]) {
-                    arr[idx] = l[i];
-                    i++;
-                }
-                else {
-                    arr[idx] = r[j];
-                    j++;
-                }
-                idx++;
-            }
-        }
-
-        for(int ll = i; ll < left; ll++) {
-            arr[idx++] = l[ll];
-        }
-        for(int rr = j; rr < right; rr++) {
-            arr[idx++] = r[rr];
-        }
-    }
-
     private void ChooseSort(){
         System.out.println("Which sort would you like to use?\n" +
                 "BubbleSort - 1\n" +
@@ -218,12 +115,15 @@ public class Arrayyy {
     public void Sort(){
         ChooseSort();
 
+        ArraySorter sorter;
         if(typeOfSort == 1)
-            BubbleSort();
+            sorter = new ArraySorterBubble();
         else if (typeOfSort == 2)
-            ShellSort();
+            sorter = new ArraySorterShell();
         else
-            MergeSort(mas);
+            sorter = new ArraySorterMerge();
+
+        sorter.sort(mas, flag == 0);
     }
 
 }
