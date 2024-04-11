@@ -1,9 +1,10 @@
-package org.example;
+package ua.nure.kpp.matvieiev.lab1.part3;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        IsomorphicStrings iso = new IsomorphicStrings();
+        IsomorphicStrings iso;
+        iso = new IsomorphicStrings();
         String flag;
         Scanner sc = new Scanner(System.in);
         do {

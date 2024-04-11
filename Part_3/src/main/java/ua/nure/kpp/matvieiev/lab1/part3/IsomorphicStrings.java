@@ -1,4 +1,4 @@
-package org.example;
+package ua.nure.kpp.matvieiev.lab1.part3;
 
 import java.util.HashMap;
 import java.util.Map;

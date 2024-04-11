@@ -1,4 +1,4 @@
-package org.example;
+package ua.nure.kpp.matvieiev.lab1.part2;
 
 
 public class Main {
