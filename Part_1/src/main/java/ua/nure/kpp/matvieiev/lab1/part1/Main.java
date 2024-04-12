@@ -55,7 +55,7 @@ public class Main {
         }while(countCheck != size);
 
 
-        //may be this check isn't needed because we have check for size of massive,
+        //may be this checking isn't needed because we have checking for size of massive,
         // so as for me, it's not possible here to have massive with length 0
         int minLength = mas.length > 0 ? String.valueOf(mas[0]).length() : 0;
         int numberOfShortest  = mas.length > 0 ? mas[0] : 0;

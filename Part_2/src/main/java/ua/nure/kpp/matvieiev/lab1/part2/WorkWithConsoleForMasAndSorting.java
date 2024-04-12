@@ -2,12 +2,12 @@ package ua.nure.kpp.matvieiev.lab1.part2;
 
 import java.util.Scanner;
 
-public class Arrayyy {
+public class WorkWithConsoleForMasAndSorting {
     Scanner sc = new Scanner(System.in);
 
     private int size;
     private int mas[];
-    private int flag = -1;
+    private boolean asc = true;
     private int typeOfSort = -1;
 
     private void setSize() {
@@ -30,38 +30,40 @@ public class Arrayyy {
         size = tmpSize;
     }
 
-    public int[] GetMas() {
+    public int[] getMas() {
         return mas;
     }
 
-    private int Flag() {
+    private boolean isAscending() {
+        int tmp = -1;
         do {
-            System.out.print("For increase sorting enter 0, for digress enter 1: ");
+            System.out.print("For sort in descending order enter 0, for sort in ascending order enter 1: ");
             try {
-                flag = sc.nextInt();
+                tmp = sc.nextInt();
             } catch (Exception ex) {
                 System.out.println("Exception! Something went wrong...");
 
-                if (flag != 0 && flag != 1)
+                if (tmp != 0 && tmp != 1)
                     sc.next();
             }
         }
-        while (flag != 0 && flag != 1);
+        while (tmp != 0 && tmp != 1);
 
-        return flag;
+        asc = (tmp == 1) ? true : false;
+        return asc;
     }
 
-    public void CreateMas() {
+    public void createMas() {
         setSize();
         if (size > 1) {
             mas = new int[size];
-            Filling();
+            filling();
         } else {
             System.out.println("You didn't enter size");
         }
     }
 
-    private void Filling() {
+    private void filling() {
         int countCheck = 0;
 
         do {
@@ -81,7 +83,7 @@ public class Arrayyy {
         } while (countCheck != size);
     }
 
-    public void PrintMas() {
+    public void printMas() {
         System.out.println("Your mas:");
         for (int i = 0; i < size; ++i) {
             System.out.print(mas[i] + " ");
@@ -89,77 +91,7 @@ public class Arrayyy {
         System.out.println();
     }
 
-
-    public void BubbleSort() {
-        System.out.println("Method was replaced as said Kinoshenko..");
-    }
-
-    public void ShellSort() {
-        System.out.println("Method was replaced as said Kinoshenko..");
-    }
-
-    public void MergeSort(int[] arr) {
-        int size = arr.length;
-        if (size == 1) return;
-
-        int mid = size / 2;
-        int[] l = new int[mid];
-        int[] r = new int[size - mid];
-
-        for (int i = 0; i < mid; i++)
-            l[i] = arr[i];
-        for (int i = mid; i < size; i++)
-            r[i - mid] = arr[i];
-
-        MergeSort(l);
-        MergeSort(r);
-        if (flag == -1)
-            Merge(arr, l, r, Flag());
-        else
-            Merge(arr, l, r, flag);
-    }
-
-    private void Merge(int[] arr, int[] l, int[] r, int flag) {
-        int left = l.length;
-        int right = r.length;
-        int i = 0;
-        int j = 0;
-        int idx = 0;
-
-
-        if (flag == 0) {
-            while (i < left && j < right) {
-                if (l[i] > r[j]) {
-                    arr[idx] = l[i];
-                    i++;
-                } else {
-                    arr[idx] = r[j];
-                    j++;
-                }
-                idx++;
-            }
-        } else {
-            while (i < left && j < right) {
-                if (l[i] < r[j]) {
-                    arr[idx] = l[i];
-                    i++;
-                } else {
-                    arr[idx] = r[j];
-                    j++;
-                }
-                idx++;
-            }
-        }
-
-        for (int ll = i; ll < left; ll++) {
-            arr[idx++] = l[ll];
-        }
-        for (int rr = j; rr < right; rr++) {
-            arr[idx++] = r[rr];
-        }
-    }
-
-    private void ChooseSort() {
+    private void chooseSort() {
         System.out.println("Which sort would you like to use?\n" +
                 "BubbleSort - 1\n" +
                 "ShellSort - 2\n" +
@@ -176,16 +108,19 @@ public class Arrayyy {
         while (typeOfSort != 1 && typeOfSort != 2 && typeOfSort != 3);
     }
 
-    public void Sort() {
-        ChooseSort();
+    public void sort() {
+        chooseSort();
+        isAscending();
+
+        ArraySorter sorter;
 
         if (typeOfSort == 1)
-            BubbleSort();
+            sorter = new ArraySorterBubble();
         else if (typeOfSort == 2)
-            ShellSort();
+            sorter = new ArraySorterShell();
         else
-            MergeSort(mas);
+            sorter = new ArraySorterMerge();
+
+        sorter.sort(mas, asc);
     }
-
 }
-

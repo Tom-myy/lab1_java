@@ -1,13 +1,12 @@
 package ua.nure.kpp.matvieiev.lab1.part2;
 
-
 public class Main {
     public static void main(String[] args) {
-        Arrayyy one = new Arrayyy();
+        WorkWithConsoleForMasAndSorting one = new WorkWithConsoleForMasAndSorting();
 
-        one.CreateMas();
-        one.PrintMas();
-        one.Sort();
-        one.PrintMas();
+        one.createMas();
+        one.printMas();
+        one.sort();
+        one.printMas();
     }
 }

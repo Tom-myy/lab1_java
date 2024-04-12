@@ -9,7 +9,7 @@ public class Main {
         Scanner sc = new Scanner(System.in);
         do {
             iso.setWords();
-            iso.Isomorphic();
+            iso.isomorphic();
             System.out.print("\nWould you like to repeat? n\\y... ");
             flag = sc.next();
             System.out.print("\n");

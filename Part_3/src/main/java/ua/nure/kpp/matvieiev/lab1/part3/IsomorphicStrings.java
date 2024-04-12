@@ -8,6 +8,18 @@ public class IsomorphicStrings {
 
     Scanner sc = new Scanner(System.in);
 
+    private IsomorphicStrings(String str1, String str2) {
+        firstWord = str1;
+        secondWord = str2;
+    }
+
+    public IsomorphicStrings() {}
+
+    public String getWords() {
+        String tmp = firstWord + " " + secondWord;
+        return firstWord;
+    }
+
     private String firstWord;
     private String secondWord;
 
@@ -18,6 +30,7 @@ public class IsomorphicStrings {
         System.out.print("Enter second word: ");
         secondWord = sc.next();
     }
+
     public boolean isIsomorphic() {
         if (firstWord.length() != secondWord.length())
             return false;
@@ -48,9 +61,9 @@ public class IsomorphicStrings {
         return true;
     }
 
-    public void Isomorphic() {
+    public void isomorphic() {
         System.out.print("These two words: \"" + firstWord + "\" and \"" + secondWord + "\" - ");
-        if(isIsomorphic())
+        if (isIsomorphic())
             System.out.print("isomorphic!");
         else
             System.out.print("NOT isomorphic!");
